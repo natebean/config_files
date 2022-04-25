@@ -1,5 +1,6 @@
 " so % to reload
 
+"https://github.com/junegunn/vim-plug
 call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
@@ -16,6 +17,10 @@ Plug 'preservim/nerdtree'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'ellisonleao/gruvbox.nvim'
+
+
+
+"https://github.com/neovim/nvim-lspconfig
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'ray-x/go.nvim'
@@ -58,14 +63,16 @@ set number
 set relativenumber
 
 nnoremap <SPACE> <Nop>
-let mapleader=","
+let mapleader=" "
 
 inoremap jk <Esc>
+"terminal
 tnoremap <Esc> <C-\><C-n>
 tnoremap <A-h> <C-\><C-N><C-w>h
 tnoremap <A-j> <C-\><C-N><C-w>j
 tnoremap <A-k> <C-\><C-N><C-w>k
 tnoremap <A-l> <C-\><C-N><C-w>l
+"other window movements
 inoremap <A-h> <C-\><C-N><C-w>h
 inoremap <A-j> <C-\><C-N><C-w>j
 inoremap <A-k> <C-\><C-N><C-w>k
@@ -74,6 +81,12 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+" window moves
+nnoremap <leader>wl <C-w>l
+nnoremap <leader>wh <C-w>h
+nnoremap <leader>wj <C-w>j
+nnoremap <leader>wk <C-w>k
 
 " Telescope
 lua require('telescope').setup{defaults = { file_ignore_patterns = {"target", ".git"}}}
@@ -90,16 +103,9 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 nnoremap <leader>n :NERDTreeFocus<CR>
-"nnoremap <C-n> :NERDTree<CR>
-" nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-" window moves
-nnoremap <leader>wl <C-w>l
-nnoremap <leader>wh <C-w>h
-nnoremap <leader>wj <C-w>j
-nnoremap <leader>wk <C-w>k
 
 " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -113,7 +119,10 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
+set undofile
+set undodir=~/.config/nvim/undodir
+
 lua require'lspconfig'.pyright.setup{}
 lua require('go').setup()
 
-source ~/AppData/Local/nvim/rust-lsp.vim
+runtime rust-lsp.vim

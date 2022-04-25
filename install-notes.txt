@@ -1,0 +1,8 @@
+Install Nodejs
+https://rpm.nodesource.com/setup_16.x | sudo bash -
+
+sudo yum install nodejs
+
+https://github.com/neovim/nvim-lspconfig
+Python Notes
+npm i -g pyright
