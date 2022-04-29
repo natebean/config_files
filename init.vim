@@ -26,7 +26,6 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'ray-x/go.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" Rust LSP plugins
 " Collection of common configurations for the Nvim LSP client
 
 " Completion framework
@@ -34,6 +33,11 @@ Plug 'hrsh7th/nvim-cmp'
 
 " LSP completion source for nvim-cmp
 Plug 'hrsh7th/cmp-nvim-lsp'
+
+" svelte
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 " Snippet completion source for nvim-cmp
 Plug 'hrsh7th/cmp-vsnip'
@@ -89,7 +93,7 @@ nnoremap <leader>wj <C-w>j
 nnoremap <leader>wk <C-w>k
 
 " Telescope
-lua require('telescope').setup{defaults = { file_ignore_patterns = {"target", ".git"}}}
+lua require('telescope').setup{defaults = { file_ignore_patterns = {"target", ".git", "node_modules"}}}
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -106,6 +110,13 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
+" For Windows??
+set clipboard^=unnamed,unnamedplus
+
+if has('win32')
+	echo "On Windows"
+	source $VIMRUNTIME/mswin.vim
+endif
 
 " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -124,5 +135,7 @@ set undodir=~/.config/nvim/undodir
 
 lua require'lspconfig'.pyright.setup{}
 lua require('go').setup()
+"npm install -g typescript typescript-language-server eslint prettier
+lua require'lspconfig'.tsserver.setup{}
 
-runtime rust-lsp.vim
+" runtime rust-lsp.vim
