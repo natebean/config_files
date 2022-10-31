@@ -1,4 +1,3 @@
-
 local ensure_packer = function()
 	local fn = vim.fn
 	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -45,7 +44,7 @@ require("packer").startup(function(use)
 	use("folke/tokyonight.nvim")
 	use("j-hui/fidget.nvim")
 	use("nvim-treesitter/nvim-treesitter-textobjects")
-	use("gelguy/wilder.nvim")
+	-- use("gelguy/wilder.nvim")
 	use({
 		"nvim-tree/nvim-tree.lua",
 		requires = {
@@ -53,6 +52,22 @@ require("packer").startup(function(use)
 		},
 		tag = "nightly", -- optional, updated every week. (see issue #1193)
 	})
+	use({
+		"rcarriga/nvim-notify",
+		config = function()
+			require("notify").setup({
+				stages = "fade_in_slide_out",
+				background_colour = "FloatShadow",
+				timeout = 3000,
+			})
+			vim.notify = require("notify")
+		end,
+	})
+	use({
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+	})
+	use({ "dccsillag/magma-nvim", run = ":UpdateRemotePlugins" })
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
