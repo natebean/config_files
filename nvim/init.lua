@@ -1,10 +1,12 @@
 -- so % to reload
-vim.cmd("set clipboard+=unnamedplus")
+-- vim.cmd("set clipboard+=unnamedplus")
 vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.cmd("let g:sneak#label = 1")
 vim.keymap.set("n", "<leader>h", ":noh<return>", {})
+vim.keymap.set("n", "<Leader>y", '"+y')
+vim.keymap.set("n", "<Leader>p", '"+p')
 vim.keymap.set("i", "jk", "<Esc>")
 vim.keymap.set("n", "<leader>wl", "<C-w>l")
 vim.keymap.set("n", "<leader>wh", "<C-w>h")
