@@ -23,9 +23,6 @@ vim.keymap.set("n", "L", "<cmd>tabprevious<cr>")
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<return>", {})
 vim.keymap.set("n", "<leader>F", vim.lsp.buf.format)
 
---format when saving
-vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
-vim.cmd([[colorscheme tokyonight]])
 
 -- nvim-tree config
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -38,6 +35,7 @@ vim.opt.termguicolors = true
 require("user.plugins")
 require("user.telescope")
 
+
 require("fidget").setup({})
 require("nvim-tree").setup({})
 require("mason").setup({})
@@ -46,3 +44,6 @@ require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 require("user.lsp")
+--format when saving
+vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
+vim.cmd([[colorscheme tokyonight]])
