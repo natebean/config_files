@@ -22,7 +22,7 @@ vim.keymap.set("n", "H", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "L", "<cmd>tabprevious<cr>")
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<return>", {})
 vim.keymap.set("n", "<leader>F", vim.lsp.buf.format)
-
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- nvim-tree config
 -- disable netrw at the very start of your init.lua (strongly advised)
@@ -40,8 +40,8 @@ require("fidget").setup({})
 require("nvim-tree").setup({})
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "sumneko_lua", "pyright", "rust_analyzer" },
-	automatic_installation = true,
+    ensure_installed = { "lua_ls", "pyright", "rust_analyzer" },
+    automatic_installation = true,
 })
 require("user.lsp")
 --format when saving
