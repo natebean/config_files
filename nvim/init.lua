@@ -3,6 +3,7 @@
 vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.mousemodel = "extend" -- no popup
 vim.cmd("let g:sneak#label = 1")
 vim.keymap.set("n", "<leader>h", ":noh<return>", {})
 vim.keymap.set("n", "<Leader>y", '"+y')
@@ -22,6 +23,13 @@ vim.keymap.set("n", "H", "<cmd>tabnext<cr>")
 vim.keymap.set("n", "L", "<cmd>tabprevious<cr>")
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<return>", {})
 vim.keymap.set("n", "<leader>F", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader><leader>x", "<Plug>JupyterExecute")
+vim.keymap.set("n", "<leader><leader>X", "<Plug>JupyterExecuteAll")
+vim.keymap.set("n", "<leader><leader>r", "<Plug>JupyterRestart")
+vim.keymap.set("n", "<leader>Y", "\"+y")
+vim.keymap.set("n", "<leader>P", "\"+p")
+vim.keymap.set("v", "<leader>Y", "\"+y")
+vim.keymap.set("v", "<leader>P", "\"+p")
 
 
 -- nvim-tree config

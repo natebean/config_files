@@ -69,6 +69,8 @@ require("packer").startup(function(use)
 	})
 	use({ "dccsillag/magma-nvim", run = ":UpdateRemotePlugins" })
 
+	use 'untitled-ai/jupyter_ascending.vim'
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if packer_bootstrap then
