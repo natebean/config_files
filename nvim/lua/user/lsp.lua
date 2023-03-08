@@ -1,38 +1,44 @@
 -- https://github.com/neovim/nvim-lspconfig
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<space>E", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+-- local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<space>E", vim.diagnostic.open_float, { desc = "diagnostic open_float" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "diagnostic goto_prev" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "diagnostic goto_next" })
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, { desc = "diagnostic setloclist" })
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+-- local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
 	local bufopts = { noremap = true, silent = true, buffer = bufnr }
-	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+	local add_desc = function(desc)
+		local r = vim.deepcopy(bufopts)
+		r["desc"] = desc
+		return r
+	end
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, add_desc("LSP declaration"))
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, add_desc("LSP definition"))
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, add_desc("LSP Hover"))
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, add_desc("LSP implementation"))
+	-- vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, bufopts)
 	-- vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
 	-- vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
 	-- vim.keymap.set("n", "<space>wl", function()
 	-- 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	-- end, bufopts)
-	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
-	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<space>f", function()
+	vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, add_desc("LSP type_definition"))
+	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, add_desc("LSP rename"))
+	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, add_desc("LSP code_action"))
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, add_desc("LSP references"))
+	vim.keymap.set("n", "<space>F", function()
 		vim.lsp.buf.format({ async = true })
-	end, bufopts)
+	end, add_desc("LSP format"))
 end
 
 -- Set up nvim-cmp.
@@ -53,7 +59,8 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
+		-- ["<C-Space>"] = cmp.mapping.complete(),
+		["<TAB>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	}),
@@ -130,22 +137,22 @@ local lsp_flags = {
 	debounce_text_changes = 150,
 }
 
-require("lspconfig")["sumneko_lua"].setup({
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { 'vim' }
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-        }
-      }
-    }
-  }
+require("lspconfig")["lua_ls"].setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+				},
+			},
+		},
+	},
 })
 require("lspconfig")["pyright"].setup({
 	on_attach = on_attach,
