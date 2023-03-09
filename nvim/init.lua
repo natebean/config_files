@@ -12,18 +12,14 @@ vim.keymap.set("n", "<Leader>p", '"+p', { desc = "Paste from system clipboard" }
 vim.keymap.set("v", "<Leader>y", '"+y', { desc = "Yank to system clipboard" })
 vim.keymap.set("v", "<Leader>p", '"+p', { desc = "Paste from system clipboard" })
 vim.keymap.set("i", "jk", "<Esc>")
--- vim.keymap.set("n", "<leader>F", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader><leader>x", "<Plug>JupyterExecute")
 vim.keymap.set("n", "<leader><leader>X", "<Plug>JupyterExecuteAll")
 vim.keymap.set("n", "<leader><leader>r", "<Plug>JupyterRestart")
-vim.keymap.set("n", "<leader>Y", "\"+y")
-vim.keymap.set("n", "<leader>P", "\"+p")
-vim.keymap.set("v", "<leader>Y", "\"+y")
-vim.keymap.set("v", "<leader>P", "\"+p")
 vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Move to right window" })
 vim.keymap.set("n", "<leader>wh", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Move to down window" })
 vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Move to up window" })
+vim.keymap.set("n", "<leader>wt", "<cmd>tabedit %<cr>", { desc = "Open in Tab" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to down window" })
@@ -33,7 +29,7 @@ vim.keymap.set("n", "<leader>wV", "<cmd>vsplit<cr>", { desc = "Vertical split" }
 vim.keymap.set("n", "H", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "L", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<return>", { desc = "Toggle NvimTreeToggle" })
--- vim.keymap.set("n", "<leader>F", vim.lsp.buf.format, { desc = "Format buffer" })
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format buffer" })
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- nvim-tree config
@@ -62,10 +58,7 @@ vim.cmd([[colorscheme tokyonight]])
 local wk = require("which-key")
 
 wk.register({
-	f = {
-		name = "Telescope", -- optional group name
-	},
-	w = {
-		name = "Window Ops", -- optional group name
-	},
+	f = { name = "Telescope", },
+	w = { name = "Window Ops", },
+	l = { name = "LSP", },
 }, { prefix = "<leader>" })
