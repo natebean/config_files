@@ -1,5 +1,4 @@
 -- so % to reload
--- vim.cmd("set clipboard+=unnamedplus")
 vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -59,7 +58,7 @@ vim.cmd([[colorscheme tokyonight]])
 local wk = require("which-key")
 
 wk.register({
-	f = { name = "Telescope", },
-	w = { name = "Window Ops", },
-	l = { name = "LSP", },
+	f = { name = "Telescope" },
+	w = { name = "Window Ops" },
+	l = { name = "LSP" },
 }, { prefix = "<leader>" })
