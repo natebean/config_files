@@ -51,6 +51,7 @@ require("mason-lspconfig").setup({
 	automatic_installation = true,
 })
 require("user.lsp")
+
 --format when saving
 vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
 vim.cmd([[colorscheme tokyonight]])
