@@ -47,7 +47,7 @@ require("fidget").setup({})
 require("nvim-tree").setup({})
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "pyright", "rust_analyzer" },
+	ensure_installed = { "lua_ls", "pyright", "rust_analyzer", "gopls" },
 	automatic_installation = true,
 })
 require("user.lsp")

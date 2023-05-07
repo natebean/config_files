@@ -177,6 +177,8 @@ require("lspconfig")["rust_analyzer"].setup({
 	},
 })
 
+require("lspconfig").gopls.setup{}
+
 local null_ls = require("null-ls")
 null_ls.setup({
 	sources = {
